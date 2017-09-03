@@ -22,12 +22,12 @@
 						<div class="form-group">
 							<input type="text" class="form-control" name="tickers">						
 						</div>
-							<button type="submit" class="btn btn-primary">Quick chart</button>
+							<button type="submit" class="btn btn-deafult">Quick chart</button>
 						
-					</form>
-
-					
+					</form>	
 				</ul>
+				
+				<p class="navbar-text navbar-right">Created by <a href="mailto:michal.nalevanko@gmail.com">Michal Nalevanko</a></p>
 		</nav>
 		
 		<div class="container">
