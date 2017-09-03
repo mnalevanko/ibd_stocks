@@ -6,9 +6,21 @@ include 'includes/header.php';
 
 <?php
 
+	if (isset($_GET['symbol']) && $_GET['symbol'] == 'single') {
+		
+		$tickers = $_POST['tickers'];
+	}
+
+?>
+
+
+
+
+<?php
+
 $msg = '';
 
-if (isset($_POST['submit'])) {
+if (isset($_POST['submit']) && (!isset($_GET['symbol']))) {
 	
 	$tickers = $_POST['tickers'];
 	// var_dump($tickers);

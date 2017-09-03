@@ -17,6 +17,16 @@
 					<li><a href="index.php">Home</a></li>
 					<li><a href="edit_watchlist.php">Edit watchlist</a></li>
 					<li><a href="charts.php">Charts</a></li>				
+					
+					<form class="navbar-form navbar-left" method="POST" action="charts.php?symbol=single">
+						<div class="form-group">
+							<input type="text" class="form-control" name="tickers">						
+						</div>
+							<button type="submit" class="btn btn-primary">Quick chart</button>
+						
+					</form>
+
+					
 				</ul>
 		</nav>
 		
