@@ -30,10 +30,10 @@ if (isset($_POST['submit']) && (!isset($_GET['symbol']))) {
 		$tickers = str_replace("  ", " ", $tickers);
 		// var_dump($tickers);
 		$tickers_arr = explode(" ", $tickers);
-		var_dump($tickers_arr);
+		// var_dump($tickers_arr);
 		$_SESSION['tickers_arr'] = $tickers_arr;
 		// echo 'Co obsahuje SESSION?';
-		var_dump($_SESSION['tickers_arr']);
+		// var_dump($_SESSION['tickers_arr']);
 		$index = 0;
 
 	} else {
