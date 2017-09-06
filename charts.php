@@ -7,7 +7,7 @@ include 'includes/header.php';
 <?php
 
 	if (isset($_GET['symbol']) && $_GET['symbol'] == 'single') {
-		
+
 		$tickers = $_POST['tickers'];
 	}
 
@@ -21,18 +21,21 @@ include 'includes/header.php';
 $msg = '';
 
 if (isset($_POST['submit']) && (!isset($_GET['symbol']))) {
-	
+
 	$tickers = $_POST['tickers'];
-	// var_dump($tickers);
 
 	if (strlen($tickers) > 0) {
-		
+		$remove_character = array("\n", "\r\n", "\r");
+		$tickers = str_replace($remove_character, " ", $tickers);
+		$tickers = str_replace("  ", " ", $tickers);
+		// var_dump($tickers);
 		$tickers_arr = explode(" ", $tickers);
+		var_dump($tickers_arr);
 		$_SESSION['tickers_arr'] = $tickers_arr;
 		// echo 'Co obsahuje SESSION?';
-		// var_dump($_SESSION['tickers_arr']);
+		var_dump($_SESSION['tickers_arr']);
 		$index = 0;
-		
+
 	} else {
 		$msg = 'An error occured. Please try edit your watchlist once again.';
 	}
@@ -45,15 +48,15 @@ if (isset($_POST['submit']) && (!isset($_GET['symbol']))) {
 <div class="container text-center">
 
 	<?php
-	
+
 		if(empty($_POST['tickers'])) {
-			
+
 			header('Location: edit_watchlist.php');
 		}
-	
+
 	?>
-	
-	<p id="tickers" class="hidden"><?php echo $_POST['tickers']; ?></p>
+
+	<p id="tickers" class="hidden"><?php echo $tickers; ?></p>
 
 	<h1 class="hidden" id="symbol">YY</h1>
 
@@ -67,14 +70,14 @@ if (isset($_POST['submit']) && (!isset($_GET['symbol']))) {
 
 	<button type="button" style="width:150px;" id="previous"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
 	<button type="button" style="width:150px;" id="next"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
-			
+
 </div>
 
 <script>
 
 var tickers = document.getElementById("tickers").innerHTML.split(" ");
 var index = 0;
-var arr_length = tickers.length; 
+var arr_length = tickers.length;
 var active = "weekly";
 var current_ticker = tickers[index];
 var url1 = 'http://research.investors.com/ibdchartswp.aspx?cht=pvc&type=';
@@ -84,20 +87,20 @@ var iframe_html = url1 + active + url2 + current_ticker.toUpperCase();
 document.getElementById("graf").innerHTML = '<iframe id="iframe" frameborder="0" style="width:960px; height:400px;" src=' + iframe_html + '></iframe>';
 
 document.getElementById("daily").onclick = function() {
-	
+
 	if (active === "weekly") {
 		document.getElementById("daily").classList.add("active");
 		document.getElementById("daily").classList.add("btn-primary");
 		document.getElementById("weekly").classList.remove("btn-primary");
 		document.getElementById("weekly").classList.remove("active");
 		document.getElementById("weekly").classList.add("btn-default");
-		
+
 		active = "daily";
-		
+
 		url = url1 + active + url2 + current_ticker.toUpperCase();
 		document.getElementById("iframe").src = url;
 	};
-	
+
 }
 
 document.getElementById("weekly").onclick = function() {
@@ -107,17 +110,17 @@ document.getElementById("weekly").onclick = function() {
 		document.getElementById("daily").classList.remove("btn-primary");
 		document.getElementById("daily").classList.remove("active");
 		document.getElementById("daily").classList.add("btn-default");
-		
+
 		active = "weekly";
-		
+
 		url = url1 + active + url2 + current_ticker.toUpperCase();
 		document.getElementById("iframe").src = url;
 	};
 }
-	
+
 
 document.getElementById("previous").onclick = function() {
-	
+
 	if (index > 0) {
 		index -= 1;
 		current_ticker = tickers[index];
@@ -127,7 +130,7 @@ document.getElementById("previous").onclick = function() {
 }
 
 document.getElementById("next").onclick = function() {
-	
+
 	if (index +1 < arr_length) {
 		index += 1;
 		current_ticker = tickers[index];
@@ -135,5 +138,5 @@ document.getElementById("next").onclick = function() {
 		document.getElementById("graf").innerHTML = '<iframe id="iframe" frameborder="0" style="width:960px; height:400px;" src=' + iframe_html + '></iframe>';
 	};
 }
-	
+
 </script>
